@@ -1,6 +1,7 @@
 Frontend app boilerplate built with react, typescript, parcel, vercel.
 
 ```
-npm run dev
-npm run build
+pnpm install
+pnpm run dev
+pnpm run build
 ```
