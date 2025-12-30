@@ -1,30 +1,65 @@
-#!/usr/bin/env bun
-import { web_search } from "../../packages/dev-tools/src/web-search-tool.ts";
-export { web_search as default };
+import { tool } from "@opencode-ai/plugin";
 
-// CLI entry point
-if (import.meta.main) {
-	const cliArgs = process.argv.slice(2);
-
-	if (cliArgs.length === 0) {
-		console.error(
-			"Usage: web_search.ts <query> [--num-results <number>]\nExample: web_search.ts 'latest TypeScript release' --num-results 5",
-		);
-		process.exit(1);
-	}
-
-	const query = cliArgs[0]!;
-	let num_results = 5;
-
-	const numIndex = cliArgs.indexOf("--num-results");
-	if (numIndex !== -1 && cliArgs[numIndex + 1]) {
-		num_results = parseInt(cliArgs[numIndex + 1]!, 10);
-		if (isNaN(num_results)) {
-			console.error("Invalid num-results value");
-			process.exit(1);
+export default tool({
+	description: "Search the web for information relevant to a research objective",
+	args: {
+		objective: tool.schema
+			.string()
+			.describe(
+				"A natural-language description of the broader task or research goal, including any source or freshness guidance"
+			),
+		search_queries: tool.schema
+			.array(tool.schema.string())
+			.optional()
+			.describe(
+				"Optional keyword queries to ensure matches for specific terms are prioritized"
+			),
+		max_results: tool.schema
+			.number()
+			.optional()
+			.default(5)
+			.describe("The maximum number of results to return (default: 5)"),
+	},
+	async execute(args) {
+		const apiKey = process.env.PARALLEL_API_KEY;
+		if (!apiKey) {
+			throw new Error("PARALLEL_API_KEY environment variable is not set");
 		}
-	}
 
-	const result = await web_search.execute({ query, num_results }, {} as any);
-	console.log(result);
-}
+		const response = await fetch("https://api.parallel.ai/v1beta/search", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				"x-api-key": apiKey,
+				"parallel-beta": "search-extract-2025-10-10",
+			},
+			body: JSON.stringify({
+				objective: args.objective,
+				search_queries: args.search_queries,
+				max_results: args.max_results,
+				mode: "agentic",
+			}),
+		});
+
+		if (!response.ok) {
+			const error = await response.text();
+			throw new Error(`Parallel API error (${response.status}): ${error}`);
+		}
+
+		const data = await response.json();
+
+		const results = data.results.map(
+			(result: {
+				title?: string;
+				url?: string;
+				excerpt?: string;
+			}) => ({
+				title: result.title,
+				url: result.url,
+				excerpt: result.excerpt,
+			})
+		);
+
+		return JSON.stringify(results, null, 2);
+	},
+});
