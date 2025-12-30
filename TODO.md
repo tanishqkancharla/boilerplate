@@ -1,0 +1,5 @@
+- [ ] Set up Opencode
+- [ ] pnpm
+- [ ] turborepo
+- [ ] purse
+- [ ] ui repo
