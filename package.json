@@ -1,33 +1,14 @@
 {
 	"name": "boilerplate",
 	"version": "0.0.1",
-	"description": "Tanishq K's Boilerplate",
+	"private": true,
+	"description": "Tanishq K's Boilerplate Monorepo",
 	"scripts": {
-		"build": "parcel src/index.html",
-		"dev": "parcel src/index.html",
-		"serve": "parcel serve dist",
-		"deploy": "npx vercel deploy",
-		"test": "NODE_OPTIONS='--loader tsx' mocha './src/**/*.test.ts' --verbose"
+		"build": "pnpm -r build",
+		"dev": "pnpm --filter @boilerplate/web dev",
+		"test": "pnpm -r test"
 	},
 	"author": "Tanishq Kancharla",
 	"license": "MIT",
-	"devDependencies": {
-		"@opencode-ai/sdk": "^1.0.218",
-		"@types/mocha": "^9.1.0",
-		"@types/react": "^17.0.40",
-		"@types/react-dom": "^17.0.13",
-		"mocha": "^9.2.2",
-		"parcel": "^2.8.2",
-		"process": "^0.11.10",
-		"serve": "^13.0.2",
-		"tsx": "^3.12.2",
-		"typescript": "^4.6.2",
-		"vercel": "^24.0.0"
-	},
-	"dependencies": {
-		"lodash": "^4.17.21",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2"
-	},
 	"packageManager": "pnpm@10.13.1+sha512.37ebf1a5c7a30d5fabe0c5df44ee8da4c965ca0c5af3dbab28c3a1681b70a256218d05c81c9c0dcf767ef6b8551eb5b960042b9ed4300c59242336377e01cfad"
 }
