@@ -3,9 +3,9 @@
 	"version": "0.0.1",
 	"description": "Tanishq K's Boilerplate Web App",
 	"scripts": {
-		"build": "parcel src/index.html",
-		"dev": "parcel src/index.html",
-		"serve": "parcel serve dist",
+		"build": "vite build",
+		"dev": "vite",
+		"preview": "vite preview",
 		"deploy": "npx vercel deploy",
 		"test": "NODE_OPTIONS='--loader tsx' mocha './src/**/*.test.ts' --verbose"
 	},
@@ -13,20 +13,17 @@
 	"license": "MIT",
 	"devDependencies": {
 		"@opencode-ai/sdk": "^1.0.218",
-		"@types/mocha": "^9.1.0",
-		"@types/react": "^17.0.40",
-		"@types/react-dom": "^17.0.13",
-		"mocha": "^9.2.2",
-		"parcel": "^2.8.2",
-		"process": "^0.11.10",
+		"@types/react": "^18.2.66",
+		"@types/react-dom": "^18.2.22",
+		"@vitejs/plugin-react": "^4.2.1",
 		"serve": "^13.0.2",
-		"tsx": "^3.12.2",
-		"typescript": "^4.6.2",
-		"vercel": "^24.0.0"
+		"typescript": "^5.2.2",
+		"vercel": "^24.0.0",
+		"vite": "^5.1.6"
 	},
 	"dependencies": {
 		"lodash": "^4.17.21",
-		"react": "^17.0.2",
-		"react-dom": "^17.0.2"
+		"react": "^18.2.0",
+		"react-dom": "^18.2.0"
 	}
 }

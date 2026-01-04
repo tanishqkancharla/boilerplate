@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 
 export function add(x: number, y: number) {
 	return x + y;
@@ -12,7 +12,8 @@ function Index() {
 function run() {
 	const container = document.createElement("main");
 	document.body.appendChild(container);
-	ReactDOM.render(<Index />, container);
+	const root = ReactDOM.createRoot(container);
+	root.render(<Index />);
 }
 
 if (typeof window !== "undefined") {
