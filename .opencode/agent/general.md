@@ -2,7 +2,7 @@
 description: |
   General sub-agent configuration. This sub-agent is invoked by the main agent using the task tool.
 
-  The General sub-agent has access to the following tools: grep, glob, read, bash, edit, webfetch, and tasks of type web_search and codebase_search.
+  The General sub-agent has access to the following tools: grep, glob, read, bash, edit, read_web_page, and tasks of type web_search and codebase_search.
 
   ### When to use the task tool (to invoke a General sub-agent):
 
@@ -38,7 +38,7 @@ tools:
   patch: true
   todowrite: true
   todoread: true
-  webfetch: true
+  read_web_page: true
   web_search: true
 ---
 

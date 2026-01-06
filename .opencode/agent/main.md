@@ -13,7 +13,7 @@ tools:
   patch: true
   todowrite: true
   todoread: true
-  webfetch: true
+  read_web_page: true
   web_search: true
   task: true
 ---
@@ -292,5 +292,6 @@ assistant: 8724
 user: Find all TODO comments in the codebase
 assistant:
 [uses grep with pattern "TODO" to search through codebase]
+
 - [`// TODO: fix this`](file:///Users/bob/src/main.js#L45)
 - [`# TODO: figure out why this fails`](file:///home/alice/utils/helpers.js#L128)
