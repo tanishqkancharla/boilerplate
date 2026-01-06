@@ -50,6 +50,9 @@
 			"*NODE_ENV=production*": "ask"
 		}
 	},
+	"tools": {
+		"webfetch": false
+	},
 	"mcp": {
 		"playwright": {
 			"type": "local",

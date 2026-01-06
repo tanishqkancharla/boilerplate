@@ -1,5 +1,7 @@
-- [ ] Set up Opencode
+- [x] Set up Opencode
 - [x] pnpm
+- [x] Agent prompt writing skill
+- [x] Playwright skill (dev-browser)
 - [ ] turborepo
 - [ ] purse
 - [ ] ui repo
